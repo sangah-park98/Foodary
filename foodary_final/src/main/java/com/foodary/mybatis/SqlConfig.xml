@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	 <!-- 데이터베이스 연결 정보가 저장된 파일의 위치 -->
+   <properties resource="com/foodary/mybatis/db.properties" />
+   
+   <typeAliases>
+      <!-- 별명 설정 (리스트)-->
+      	<typeAlias type="com.foodary.vo.FoodVO" alias="fvo" />
+      	<typeAlias type="com.foodary.vo.UserRegisterVO" alias="rvo" />
+      	<typeAlias type="com.foodary.vo.DietVO" alias="dvo" />
+      	<typeAlias type="com.foodary.vo.UserFoodVO" alias="uvo" />
+      	<typeAlias type="com.foodary.vo.FreeboardVO" alias="vo" />
+		<typeAlias type="com.foodary.vo.FreeboardCommentVO" alias="co" />
+		<typeAlias type="com.foodary.vo.Param" alias="pvo"/>
+   </typeAliases>
+   
+   <environments default="development">
+      <environment id="development">
+         <transactionManager type="JDBC" />
+         <dataSource type="POOLED">
+            <property name="driver" value="${driver}" />
+            <property name="url" value="${url}" />
+            <property name="username" value="${username}" />
+            <property name="password" value="${password}" />
+         </dataSource>
+      </environment>
+   </environments>
+   
+   <mappers>
+      <!-- 실행할 sql 명령이 저장된 파일의 위치(리스트) -->
+      	<mapper resource="com/foodary/mybatis/food.xml" />
+      	<mapper resource="com/foodary/mybatis/userregister.xml" />
+      	<mapper resource="com/foodary/mybatis/diet.xml" />
+     	<mapper resource="com/foodary/mybatis/userfood.xml" />
+      	<mapper resource="com/foodary/mybatis/freeboard.xml" />
+		<mapper resource="com/foodary/mybatis/freeboardcomment.xml" />
+   </mappers>
+	
+</configuration>

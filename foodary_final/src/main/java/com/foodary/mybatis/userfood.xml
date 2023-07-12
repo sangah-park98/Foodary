@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodary.vo.UserFoodVO">
+
+	<insert id="insertFood" parameterType="uvo">
+		insert into userfood (idx, userFoodName, userKcal, userCarbs, userProtein, userFat, userFoodTime , userFoodDate) 
+		values (userfood_idx_seq.nextval, #{userFoodName} ,#{userKcal}, #{userCarbs}, #{userProtein}, #{userFat}, #{userFoodTime} , #{userFoodDate})
+	</insert>
+	
+	<select id="userSelectList" parameterType="uvo" resultType="uvo">
+		SELECT * FROM USERFOOD WHERE userFoodDate = #{userFoodDate} AND userFoodTime = #{userFoodTime} ORDER BY idx DESC
+	</select>
+	
+	<select id="userSelectDietList" parameterType="String" resultType="uvo">
+		SELECT * FROM USERFOOD WHERE userFoodDate = #{userFoodDate} ORDER BY userFoodTime asc
+	</select>
+	
+	<select id="userSelectDietList2" parameterType="uvo" resultType="uvo">
+		select * from userfood where userFoodDate = #{userFoodDate} AND userFoodTime = #{userFoodTime}
+	</select>
+	
+ 	<select id="selectUserFoodBeforeSelect" parameterType="uvo" resultType="uvo">
+      SELECT * FROM USERFOOD WHERE userFoodDate = #{userFoodDate} AND userFoodTime = #{userFoodTime} ORDER BY userFoodTime
+   </select>
+   
+   <update id="dietUpdateByDateTime" parameterType="uvo">
+		update userfood set userFoodName = #{userFoodName}, userKcal = #{userKcal}, userCarbs = #{userCarbs}, userProtein = #{userProtein} ,
+			userFat = #{userFat}, userFoodTime = #{userFoodTime}, userFoodDate = #{userFoodDate}
+			where dietWriteDate = dietWriteDate and dietWriteTime = dietWriteTime
+   </update>
+	
+	   <!-- showDiet.jsp => foodUpdateOK.jsp -->
+    <select id="selectUserFoodListTofoodwrite" parameterType="uvo" resultType="uvo">
+      SELECT * FROM USERFOOD WHERE userFoodDate = #{userFoodDate} AND userFoodTime = #{userFoodTime}
+   </select>
+	
+   <update id="UpdateUserFoodList" parameterType="uvo">
+      update userfood set userFoodName = #{userFoodName}, userKcal = #{userKcal}, userCarbs = #{userCarbs}, userProtein = #{userProtein},
+         userFat = #{userFat}, userFoodTime = #{userFoodTime}, userFoodDate = #{userFoodDate} where idx = #{idx}
+   </update>
+   
+   <delete id="deleteUserFoodList" parameterType="int">
+         delete from userfood where idx = #{idx} 
+   </delete>
+   
+    <delete id="deleteUser" parameterType="uvo">
+         delete from userfood where userFoodDate = #{userFoodDate} and userFoodTime = #{userFoodTime}
+   </delete>
+		
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
