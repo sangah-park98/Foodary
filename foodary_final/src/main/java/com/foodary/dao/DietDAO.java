@@ -62,13 +62,11 @@ public class DietDAO {
 		mapper.delete("deleteDietList", idx);
 		
 	}
-	
-	// dietListView.jsp에서 날짜, 시간 띄우기
-	public ArrayList<DietVO> selectDateTime(SqlSession mapper, String dietWriteDate) {
-		System.out.println("DietDAO 클래스의 selectDateTime()");
-		return (ArrayList<DietVO>) mapper.selectList("selectDateTime", dietWriteDate);
-   }
-	
+	 // dietListView.jsp에서 날짜, 시간 띄우기
+	   public ArrayList<DietVO> selectDateTime(SqlSession mapper, String dietWriteDate) {
+	      System.out.println("DietDAO 클래스의 selectDateTime()");
+	      return (ArrayList<DietVO>) mapper.selectList("selectDateTime", dietWriteDate);
+	   }
    // dietView의 수정하기 버튼을 통한 수정
    public void UpdateDiet(SqlSession mapper, DietVO dvo) {
       System.out.println("DietDAO 클래스의 UpdateDiet()");

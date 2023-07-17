@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -16,6 +16,10 @@
    request.setCharacterEncoding("UTF-8");
    String dietWriteDate = request.getParameter("dietWriteDate");
    String dietWriteTime = request.getParameter("dietWriteTime");
+   String userFoodDate = request.getParameter("dietWriteDate");
+   String userFoodTime = request.getParameter("dietWriteTime");
+   out.println(dietWriteDate);
+   out.println(dietWriteTime);
    
    DietVO dietvo = new DietVO();
    dietvo.setDietWriteDate(dietWriteDate);
@@ -38,7 +42,7 @@
    request.setAttribute("dietList", dietList);
    request.setAttribute("userFoodList", userFoodList);
    pageContext.forward("dietView.jsp");
-   
+ 
 %>
 
 </body>

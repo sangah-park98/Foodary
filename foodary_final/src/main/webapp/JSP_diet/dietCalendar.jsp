@@ -269,7 +269,7 @@
 	<!-- 년, 월을 선택된 년도와 달의 달력으로 한번에 넘어가게 한다. -->
 	<tr>
 		<td id="choice" colspan="7">
-	<form action="dietListView.jsp" method="post">
+	<form action="#" method="post" onsubmit="navigateToSelectedMonth(event)">
 		<fieldset>
 			<legend>년</legend>
 			<select class="select" name="year">

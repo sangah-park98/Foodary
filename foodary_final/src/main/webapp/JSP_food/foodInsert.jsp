@@ -49,13 +49,18 @@
 	<jsp:setProperty property="*" name="uvo"/>
 </jsp:useBean>
 <%
+	String userFoodDate = request.getParameter("userFoodDate");
+	String userFoodTime = request.getParameter("userFoodTime");
 	out.println(uvo);
 	out.println(uvo.getUserFoodName());
 	UserFoodService.getInstance().insertFood(uvo);
 	UserFoodList userFoodList = UserFoodService.getInstance().userSelectList(uvo);
 	out.println(uvo);
-	request.setAttribute("userFoodList", userFoodList);
-	pageContext.forward("foodWrite.jsp");
+	
+	session.setAttribute("userFoodDate", userFoodDate);
+	session.setAttribute("userFoodTime", userFoodTime);
+	session.setAttribute("userFoodList", userFoodList);
+	response.sendRedirect("foodWrite.jsp");
 %>
 </body>
 </html>

@@ -36,7 +36,11 @@
 
 </style>
 </head>
-<body>
+<body onload = "showNutrient()">
+<div class="container">
+      <div class="header">
+      <jsp:include page="./headerAfter.jsp"></jsp:include>
+   </div>
 <div class="dietContent_title">
    <b><i class="bi bi-cup-straw"></i>식단 수정</b>
 </div>
@@ -77,11 +81,6 @@
            proteins = new String[]{};
            fats = new String[]{};
       } else {
-	      request.setAttribute("foodNames", foodNames);
-	      request.setAttribute("kcals", kcals);
-	      request.setAttribute("carbs", carbs);
-	      request.setAttribute("proteins", proteins);
-	      request.setAttribute("fats", fats);
 	       // 세션에 데이터 저장
 	       session.setAttribute("foodNames", foodNames);
 	       session.setAttribute("kcals", kcals);
@@ -104,24 +103,82 @@
 			request.setAttribute("proteins", proteins);
 			request.setAttribute("fats", fats);
 		}
+		
+		String userFoodDate = request.getParameter("userFoodDate");
+		String userFoodTime = request.getParameter("userFoodTime");
+	    request.setAttribute("userFoodDate", userFoodDate);
+	    request.setAttribute("userFoodTime", userFoodTime); 
 %>
+<div class="main" style="text-align: center;" align="center">
+<input id="id" type="hidden" name="id" value="${rvo.id}"/>
+<input id="height" type="hidden" name="height" value="${rvo.height}">
+<input id="currentWeight" type="hidden" name="currentWeight" value="${rvo.currentWeight}">
+<input id="goalWeight" type="hidden" name="goalWeight" value="${rvo.goalWeight}">
+<input id="age" type="hidden" name="age" value="${rvo.age}">
+<input id="gender" type="hidden" name="gender" value="${rvo.gender}"/>
+<c:if test="${rvo.state eq 'health'}">
+    <input id="health" type="radio" name="mode" value="health" checked="checked" style="display: none;"/>
+    <input id="diet" type="radio" name="mode" value="diet" style="display: none;"/>
+</c:if>
+<c:if test="${rvo.state eq 'diet'}">
+    <input id="health" type="radio" name="mode" value="health" style="display: none;"/>
+    <input id="diet" type="radio" name="mode" value="diet" checked="checked" style="display: none;"/>
+</c:if>
+<c:set var="active" value="${rvo.active}"/>
+<select name="active" style="height: 40px; display: none;">
+   <option value="다시" name="active" 
+      <c:if test="${active == '다시'}">selected="selected"
+      </c:if>>활동량 선택
+   </option>
+     <option value="1.2" name="active" 
+        <c:if test="${active == '1.2'}">selected="selected"
+        </c:if>>많이 앉아있는 경우
+     </option>
+   <option value="1.375" name="active" 
+      <c:if test="${active == '1.375'}">selected="selected"
+      </c:if>>앉아있는 일이 적은 경우
+   </option>
+   <option value="1.55" name="active" 
+      <c:if test="${active == '1.55'}">selected="selected"
+      </c:if>>움직임이 많은 경우
+   </option>
+   <option value="1.725" name="active" 
+      <c:if test="${active == '1.725'}">selected="selected"
+      </c:if>>운동 될 움직임을 할 경우
+   </option>
+   <option value="1.9" name="active" 
+      <c:if test="${active == '1.9'}">selected="selected"
+      </c:if>>매우 많은 운동량
+   </option>
+</select>
 
-<div class="diet">
-<form action="dietViewUpdateOK.jsp" method="post">
+<%--       <input type="hidden" id="userFoodDate" name="userFoodDate" value="${userFoodDate}" />
+      <input type="hidden" id="userFoodTime" name="userFoodTime" value="${userFoodTime}" /> --%>
+         <span style="background: #fafcd9; font-size: 50pt; font-weight: 900;">푸드어리 수정</span>
+<form accept-charset="UTF-8" action="dietViewUpdateOK.jsp" method="post">
    <c:set var="list" value="${userFoodList.list}"/>
+	<div class="diet">
    <table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
-      <!-- 1 -->
-      <tr>
-         <td colspan="2" class="text-center">
-            <label for="ateDate">일시</label>
-         </td>
+	      <!-- 1 -->
+	      <tr>
+	         <td colspan="2" class="text-center">
+	            <label for="ateDate">일시</label>
+	         </td>
             <td colspan="6">
                <input type="Date" id="userFoodDate" name="userFoodDate" value="${list[0].userFoodDate}" style="width: 48%; height: 90%;"/>       
             </td>
             <td colspan="6">            
                <input type="Time" id="userFoodTime" name="userFoodTime" value="${list[0].userFoodTime}" style="width: 48%; height: 90%;"/>       
            </td>
-         </tr>
+		</tr>     
+	    <%--  <tr>
+            <td colspan="6">
+               <input type="Date" id="userFoodDate" name="userFoodDate" value="${userFoodDate}" style="width: 48%; height: 90%;"/>       
+            </td>
+            <td colspan="6">            
+               <input type="Time" id="userFoodTime" name="userFoodTime" value="${userFoodTime}" style="width: 48%; height: 90%;"/>       
+           </td>
+         </tr> --%>
           <!-- 2 -->
          <tr>
          <td colspan="3" class="text-center" style="font-size: 13px;">
@@ -153,38 +210,38 @@
             <input type="text" id="dietFoodName" name="dietFoodName" value="${foodNames[index]}" />
          </td>
          
-         <td colspan="1">
+         <td>
             <label for="totalcalorie">칼로리</label>
          </td>
          
-         <td colspan="2" class="kcals" id="kcal">
+         <td colspan="2" id="kcal">
             <input type="text" id="dietKcal" name="dietKcal" value="${kcals[index]}"/>      
          </td>
          
-         <td colspan="1">
+         <td>
             <label for="carbo">탄수화물</label>
          </td>
          
-         <td colspan="1"class="carbs">
+         <td id="carbs">
             <input type="text" id="dietCarbs" name="dietCarbs" value="${carbs[index]}"/>      
          </td>
          
-         <td colspan="1">
+         <td>
             <label for="protein">단백질</label>
          </td>
          
-         <td colspan="1" class="proteins">
+         <td id="proteins">
            <input type="text" id="dietProtein" name="dietProtein" value="${proteins[index]}"/>       
          </td>
          
-         <td colspan="1" >
+         <td>
             <label for="province">지방</label>
          </td>
          
-         <td colspan="1" class="fats">
+         <td id="fats">
             <input type="text" id="dietFat" name="dietFat" value="${fats[index]}"/>      
          </td>
-         <td colspan="1" align="center">
+         <td align="center">
              <input type="button" value="추가" onclick="foodPlus(<c:out value='${index}' />)"/>
          </td>
       </tr>
@@ -203,9 +260,9 @@
      <fmt:requestEncoding value="UTF-8"/>
       <!-- foodWriteInsert.jsp에서 request 영역에 저장한 foodList에서 1페이지 분량의 글을 꺼내온다. -->
       <c:set var="list" value="${userFoodList.list}"/>
-      <c:forEach var="uvo" items="${list}">
+      <c:forEach var="uvo" items="${list}" varStatus="status">
       <tr>
-        <td colspan="1" align="center">
+        <td align="center">
           내 식단
         </td>
         <td colspan="2" class="text-center">
@@ -214,33 +271,33 @@
         <td colspan="2" class="text-center">
           <input type="text" id="userFoodName_${status.index}" name="userFoodName_${status.index}" value="${uvo.userFoodName}"/>   
         </td>
-        <td colspan="1" class="text-center">
+        <td class="text-center">
           <label for="totalcalorie">칼로리</label>
         </td>
         <td colspan="2" class="kcals" id="kcal">
           <input type="text" id="userKcal_${status.index}" name="userKcal_${status.index}" value="${uvo.userKcal}"/>      
         </td>
-        <td colspan="1">
+        <td>
           <label for="carbo">탄수화물</label>
         </td>
-        <td colspan="1" class="carbs">
+        <td class="carbs">
           <input type="text" id="userCarbs_${status.index}" name="userCarbs_${status.index}" value="${uvo.userCarbs}"/>      
         </td>
-        <td colspan="1">
+        <td>
           <label for="protein">단백질</label>
         </td>
-        <td colspan="1" class="proteins">
+        <td class="proteins">
           <input type="text" id="userProtein_${status.index}" name="userProtein_${status.index}" value="${uvo.userProtein}"/>       
         </td>
-        <td colspan="1" class="text-center">
+        <td class="text-center">
           <label for="province">지방</label>
         </td>
-        <td colspan="1" class="fats">
+        <td class="fats">
           <input type="text" id="userFat_${status.index}" name="userFat_${status.index}" value="${uvo.userFat}"/>      
         </td>
-        <td colspan="1" align="center">
+        <td align="center">
           <input type="button" value="수정" onclick="updateUserFood(${uvo.idx}, ${status.index})"/>
-          <input type="button" value="삭제" onclick="location.href='deleteFood.jsp?idx=${uvo.idx}&userFoodDate=${userFoodDate}&userFoodTime=${userFoodTime}'"/>
+          <input type="button" value="삭제" onclick="location.href='dietDeleteFood.jsp?idx=${uvo.idx}&userFoodDate=${userFoodDate}&userFoodName=${uvo.userFoodName}&userFoodTime=${userFoodTime}&userKcal=${uvo.userKcal}&userCarbs=${uvo.userCarbs}&userProtein=${uvo.userProtein}&userFat=${uvo.userFat}'"/>
         </td>
       </tr>
     </c:forEach>
@@ -249,7 +306,7 @@
     <table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
    <!-- 4 -->
    <c:set var="list" value="${dietList.list}"/>
-   <input type="hidden"  name="dietIdx" value="${list[0].idx}"/>
+	<input type="text"  name="dietIdx" value="${list[0].idx}"/> 
    <tr>
       <td colspan="2" class="text-center">
          <label for="memo">메모</label>
@@ -300,14 +357,6 @@
           </div>
        </td>
        <td style="width: 33.3%;">
-          <div class="progress" style="height: 40px;">
-               <div id="fatGraph" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
-                  aria-valuemin="0" aria-valuemax="100" style="width:0%; height: 40px;">
-                 지방
-               </div>
-          </div>
-       </td>   
-       <td style="width: 33.3%;">
              <div class="progress" style="height: 40px;">   
                   <div id="proteinGraph" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
                      aria-valuemin="0" aria-valuemax="100" style="width:0%; height: 40px;">
@@ -315,6 +364,14 @@
                   </div>
              </div>
        </td>      
+       <td style="width: 33.3%;">
+          <div class="progress" style="height: 40px;">
+               <div id="fatGraph" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
+                  aria-valuemin="0" aria-valuemax="100" style="width:0%; height: 40px;">
+                 지방
+               </div>
+          </div>
+       </td>   
     </tr>
     <!-- 8 -->
     <tr>
@@ -323,7 +380,6 @@
           <input type="submit" value="수정완료"/>
        </td>
     </tr>
-   
    </table>
   </form>
    

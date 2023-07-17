@@ -58,8 +58,10 @@
          <label for="ateDate">일시</label>
       </th>
       <th colspan="8">
-         <input type="text" name="dietWriteDate" value="${list[0].userFoodDate}" style="width: 48%; height: 90%;" readonly="readonly"/>
-            <input type="text" name="dietWriteTime" value="${list[0].userFoodTime}" style="width: 48%; height: 90%;" readonly="readonly"/>
+       <%--   <input type="text" name="dietWriteDate" value="${list[0].userFoodDate}" style="width: 48%; height: 90%;" readonly="readonly"/>
+            <input type="text" name="dietWriteTime" value="${list[0].userFoodTime}" style="width: 48%; height: 90%;" readonly="readonly"/> --%>
+        <input type="text" name="dietWriteDate" value="${list[0].userFoodDate}" style="width: 48%; height: 90%;" readonly="readonly"/>
+            <input type="text" name="dietWriteTime" value="${list[0].userFoodTime}" style="width: 48%; height: 90%;" readonly="readonly"/> 
       </th>
    </tr>
    <!-- 2 -->

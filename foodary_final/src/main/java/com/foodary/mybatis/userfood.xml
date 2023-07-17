@@ -29,7 +29,7 @@
 			where dietWriteDate = dietWriteDate and dietWriteTime = dietWriteTime
    </update>
 	
-	   <!-- showDiet.jsp => foodUpdateOK.jsp -->
+   <!-- showDiet.jsp => foodUpdateOK.jsp -->
     <select id="selectUserFoodListTofoodwrite" parameterType="uvo" resultType="uvo">
       SELECT * FROM USERFOOD WHERE userFoodDate = #{userFoodDate} AND userFoodTime = #{userFoodTime}
    </select>

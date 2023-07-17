@@ -30,11 +30,16 @@
  <jsp:useBean id="dvo" class="com.foodary.vo.DietVO">
 	<jsp:setProperty property="*" name="dvo"/>
 </jsp:useBean> 
-
 <%
 	String dietMemo = request.getParameter("dietMemo");
-	String dietWriteDate = request.getParameter("userFoodDate");
-	String dietWriteTime = request.getParameter("userFoodTime"); 
+	String dietWriteDate = null;
+	String dietWriteTime = null;
+	if(request.getParameter("userFoodDate") == null) {
+		 dietWriteDate = request.getParameter("dietWriteDate");
+	} else {
+		 dietWriteDate = request.getParameter("userFoodDate");
+		 dietWriteTime = request.getParameter("userFoodTime");
+	}
 	//out.println(dietWriteDate  + dietWriteTime);
 	dvo.setDietWriteDate(dietWriteDate);
 	dvo.setDietWriteTime(dietWriteTime);
@@ -43,19 +48,14 @@
 		DietService.getInstance().insert(dvo);
 	} 
 
- 	//DietList dietList = DietService.getInstance().selectDiet(dietWriteDate);
-	
-	//request.setAttribute("enter", "\r\n");
-	//request.setAttribute("dietWriteDate", dietWriteDate);
-	//request.setAttribute("dietWriteTime", dietWriteTime);
-	//request.setAttribute("dietList", dietList);
-
+	session.removeAttribute("foodName");
+	session.removeAttribute("kcal");
+	session.removeAttribute("carbs");
+	session.removeAttribute("protein");
+	session.removeAttribute("fat");
 //	입력한 음식글 dietListView.jsp로 넘겨준다.
 	response.sendRedirect("dietListView.jsp?dietWriteDate=" + dietWriteDate); 
 %>
-
-
-
 
 </body>
 </html>;

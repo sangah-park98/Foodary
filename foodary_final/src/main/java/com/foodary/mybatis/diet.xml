@@ -40,12 +40,16 @@
    <delete id="deleteDietList" parameterType="int">
    		delete from diet where idx = #{idx}
    </delete>
-	
-	<!-- dietListView.jsp에서 날짜, 시간 띄우기 -->
+   
+   <!-- dietListView.jsp에서 날짜, 시간 띄우기 -->
    <select id="selectDateTime" parameterType="String" resultType="dvo">
       select dietWriteDate, dietWriteTime from diet where dietWriteDate = #{dietWriteDate} order by dietWriteTime
    </select>
-	
+   
+	   <update id="UpdateDiet" parameterType="dvo">
+      update diet set dietMemo = #{dietMemo}, dietWriteDate = #{dietWriteDate}, dietWriteTime = #{dietWriteTime}
+         where idx = #{idx}
+   </update>
 </mapper>
 
 

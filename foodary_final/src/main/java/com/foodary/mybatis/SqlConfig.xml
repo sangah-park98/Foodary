@@ -14,7 +14,7 @@
       	<typeAlias type="com.foodary.vo.UserFoodVO" alias="uvo" />
       	<typeAlias type="com.foodary.vo.FreeboardVO" alias="vo" />
 		<typeAlias type="com.foodary.vo.FreeboardCommentVO" alias="co" />
-		<typeAlias type="com.foodary.vo.Param" alias="pvo"/>
+		<typeAlias type="com.foodary.vo.Param" alias="pvo" />
    </typeAliases>
    
    <environments default="development">

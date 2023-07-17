@@ -1,3 +1,4 @@
+<%@page import="com.foodary.vo.FoodVO"%>
 <%@page import="com.foodary.vo.UserFoodVO"%>
 <%@page import="com.foodary.service.UserFoodService"%>
 <%@page import="com.foodary.vo.UserFoodList"%>
@@ -13,59 +14,36 @@
 </head>
 <body>
 
- <jsp:useBean id="dvoup" class="com.foodary.vo.DietVO">
-   <jsp:setProperty property="*" name="dvoup"/>
+ <jsp:useBean id="uvo" class="com.foodary.vo.UserFoodVO">
+   <jsp:setProperty property="*" name="uvo"/>
 </jsp:useBean> 
 
+
 <%
+
    request.setCharacterEncoding("UTF-8");
 
-   String dietidx = request.getParameter("dietIdx");
-   int dietIdx = Integer.parseInt(dietidx);
-   String dietMemo = request.getParameter("dietMemo");
-    String dietWriteDate = request.getParameter("FoodDate");
-    String dietWriteTime = request.getParameter("FoodTime");
-   
-   DietVO dietvo = new DietVO();
-   dietvo.setIdx(dietIdx);
+   int dietidx = Integer.parseInt(request.getParameter("dietIdx"));
+   out.println(dietidx);
+    String dietMemo = request.getParameter("dietMemo");
+    String dietWriteDate = request.getParameter("userFoodDate");
+    String dietWriteTime = request.getParameter("userFoodTime");
+	out.println(dietMemo);
+	out.println(dietWriteDate);
+    DietVO dietvo = new DietVO();
+   dietvo.setIdx(dietidx);
    dietvo.setDietMemo(dietMemo);
    dietvo.setDietWriteDate(dietWriteDate);
    dietvo.setDietWriteTime(dietWriteTime);
    
-//   out.println(dietWriteDate + ", " + dietWriteTime);
-   
-// diet 데이터 불러옴
-//   DietService service = DietService.getInstance();
-//   DietList dietList = service.selectDietList(dietvo);
-
-
-
-//   out.println(dietList);
-
-//   diet에서 idx 넘어오는 거 확인완료!
-//   out.println(dietList.getList().get(1).getIdx());
-   DietService.getInstance().UpdateDiet(dietvo);
-//      out.println("diet 수정 완료!");
-   
-//   UserFoodVO userfoodvo = new UserFoodVO();
-//   userfoodvo.setUserFoodDate(dietWriteDate);
-//   userfoodvo.setUserFoodTime(dietWriteTime);
-   
-//   UserFoodList userFoodList = UserFoodService.getInstance().userSelectDietList2(userfoodvo);
-//   out.println(userFoodList);
-// 여기까지가 화면에 데이터를 출력해주는 코드(이 이후는 update)   
-
-
-   
-   
-//   공지글과 메인글의 목록을 request 영역에 저장해서 메인글을 화면에 표시하는 페이지(listView.jsp)로 넘겨준다.
-  
-/* 
-   request.setAttribute("dietList", dietList);
-   request.setAttribute("userFoodList", userFoodList);
-   pageContext.forward("dietUpdate.jsp");
- */
  
+ 	out.println("<script>");
+   // diet 테이블에서 idx를 이용하여 수정하기
+   DietService.getInstance().UpdateDiet(dietvo);
+	out.println(dietWriteDate);
+    out.println("alert('수정 완료!')");
+   out.println("location.href='/foodary_final/JSP_diet/dietList.jsp?dietWriteDate="+ dietWriteDate + "'");
+   out.println("</script>"); 
  %>
 
 </body>

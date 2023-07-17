@@ -6,8 +6,7 @@
 <%@page import="com.foodary.vo.UserFoodList"%>
 <%@page import="com.foodary.service.UserFoodService"%>
 <%@page import="com.foodary.vo.UserFoodVO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,18 +21,12 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
-
 	int idx = Integer.parseInt(request.getParameter("idx"));
 	UserFoodService.getInstance().deleteUserFoodList(idx);
-	session.removeAttribute("userFoodList");
 	
-	/* UserFoodList userFoodList = UserFoodService.getInstance().userSelectList(uvo);
-	out.println(userFoodList); */
-	// pageContext.setAttribute("userFoodList" , userFoodList);
-	//유저 푸드 리스트를 객체로 받아서
-
-	pageContext.forward("foodWrite.jsp");
-	
+	UserFoodList userFoodList = UserFoodService.getInstance().userSelectList(uvo);
+	session.setAttribute("userFoodList", userFoodList);
+	response.sendRedirect("foodWrite.jsp");
 %>
 
 </body>

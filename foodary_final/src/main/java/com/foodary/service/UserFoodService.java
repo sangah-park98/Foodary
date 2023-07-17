@@ -101,7 +101,6 @@ public class UserFoodService {
         mapper.commit();
         mapper.close();
      }
-
     
     // foodUpdateComplete.jsp
     public void UpdateUserFoodList(UserFoodVO uvo) {

@@ -1,38 +1,3 @@
-/*  $('#foodName').val(data2);
-  // form 제출
-  //document.getElementById('myForm').submit();
-  document.getElementById('wfoodName').value();*/
-	  
-// 단일 음식 write로 이동 함수 (완성)
-/*
-function addData() {
-  var selectedRadio = document.querySelector('input[name="food"]:checked');
-  if (selectedRadio) {
-    var parentRow = selectedRadio.closest('tr');
-    var foodName = parentRow.querySelector('td:nth-child(2)').innerHTML.trim();
-    var kcal = parentRow.querySelector('td:nth-child(3)').innerHTML.trim();
-    var carbs = parentRow.querySelector('td:nth-child(4)').innerHTML.trim();
-    var protein = parentRow.querySelector('td:nth-child(5)').innerHTML.trim();
-    var fat = parentRow.querySelector('td:nth-child(6)').innerHTML.trim();
-	console.log(foodName + kcal + carbs + protein + fat);
-	 // 세션 데이터 가져오기
-      var dietWriteDate = document.getElementById('dietWriteDate').value;
-  var dietWriteTime = document.getElementById('dietWriteTime').value;
-
-  console.log(dietWriteDate);
-  console.log(dietWriteTime);
-    // 선택한 데이터를 URL 매개변수로 전달하여 페이지 이동
-	window.location.href =  'foodWrite.jsp?foodName=' + encodeURIComponent(foodName) +
-    '&kcal=' + encodeURIComponent(kcal) +
-    '&carbs=' + encodeURIComponent(carbs) +
-    '&protein=' + encodeURIComponent(protein) +
-    '&fat=' + encodeURIComponent(fat) + 
-	'&dietWriteDate=' + encodeURIComponent(dietWriteDate) +
-	'&dietWriteTime=' + encodeURIComponent(dietWriteTime);
-   window.location.href = url;	
-  }
-}
-*/
 
 function addData() {
   var selectedRadios = document.querySelectorAll('input[name="foodName"]:checked');
@@ -69,8 +34,9 @@ function addData() {
              '&';
     }
    var userFoodDate = getParameterByName('userFoodDate'); // URL에서 userFoodDate 값을 가져오는 함수 호출
-	var userFoodTime = getParameterByName('time'); // URL에서 time 값을 가져오는 함수 호출
-	
+	var userFoodTime = getParameterByName('userFoodTime'); // URL에서 time 값을 가져오는 함수 호출
+	console.log(userFoodDate);
+	console.log(userFoodTime);
 	//url += 'userFoodDate=' + encodeURIComponent(userFoodDate.replace(/%20/g, ''));
 	url += 'userFoodDate=' + encodeURIComponent(userFoodDate);
 	url += '&userFoodTime=' + encodeURIComponent(userFoodTime);

@@ -9,7 +9,24 @@ function dayCheck() {
 //	$('#sendMonth').val() = month;
 //	$('#sendDay').val() = day;
 };
+	//submit
+function navigateToSelectedMonth(event) {
+    event.preventDefault(); // 기본 form submit 동작 막기
 
+    var form = event.target; // form 요소 가져오기
+    var year = form.elements.year.value; // 선택한 년도 값 가져오기
+    var month = form.elements.month.value; // 선택한 월 값 가져오기
+
+	   if (month.length === 1) {
+	  month = '0' + month;
+	}
+	
+	// 선택한 월로 이동하는 URL 생성
+	var url = 'dietListView.jsp?dietWriteDate=' + year + '-' + month + '-01';
+
+    // URL로 이동
+  window.location.href = url;
+  }
 
 
 ///////////////////////////////////이미지 캡쳐////////////////////////////////////

@@ -30,9 +30,8 @@
 	UserFoodVO uvo = new UserFoodVO(idx, userFoodName, userKcal, userCarbs, userProtein, userFat, userFoodDate, userFoodTime);
   	UserFoodService.getInstance().UpdateUserFoodList(uvo);
 	UserFoodList userFoodList = UserFoodService.getInstance().userSelectList(uvo);
-	// out.println(uvo);
-	request.setAttribute("userFoodList", userFoodList);
-	pageContext.forward("dietUpdate.jsp");
+	session.setAttribute("userFoodList", userFoodList);
+	response.sendRedirect("dietUpdate.jsp");
 %>
 </body>
 </html>

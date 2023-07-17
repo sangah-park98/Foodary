@@ -12,7 +12,7 @@
 <meta charset="UTF-8">
 <title>음식 넣기</title>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-  <script type="text/javascript" src="./js/foodView.js" defer="defer"></script> 
+  <script type="text/javascript" src="./js/updateFoodView.js" defer="defer"></script> 
 <style type="text/css">
 
 	.dietContent_title {

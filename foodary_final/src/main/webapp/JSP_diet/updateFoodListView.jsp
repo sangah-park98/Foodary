@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>음식 목록</title>
-<script type="text/javascript" src="./js/updateFoodView.js"></script> 
+<script type="text/javascript" src="./js/updateFoodView.js" defer="defer"></script> 
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <style type="text/css">
 
@@ -34,6 +34,7 @@
 </head>
 <body>
 <%
+request.setCharacterEncoding("UTF-8");
 
 String userFoodDate = request.getParameter("userFoodDate");
 String userFoodTime = request.getParameter("userFoodTime");

@@ -4,8 +4,7 @@
 <%@page import="com.foodary.vo.DietVO"%>
 <%@page import="com.foodary.vo.DietList"%>
 <%@page import="com.foodary.service.DietService"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,11 +39,17 @@
    userfoodvo.setUserFoodDate(dietWriteDate);
    userfoodvo.setUserFoodTime(dietWriteTime);
    UserFoodList userFoodList = UserFoodService.getInstance().userSelectDietList2(userfoodvo);
-   out.println(userFoodList);
- 
-   request.setAttribute("dietList", dietList);
-   request.setAttribute("userFoodList", userFoodList);
-   pageContext.forward("dietUpdate.jsp");
+   //out.println(userFoodList);
+   
+   session.removeAttribute("foodNames");
+	session.removeAttribute("kcals");
+	session.removeAttribute("carbs");
+	session.removeAttribute("proteins");
+	session.removeAttribute("fats");
+	
+   session.setAttribute("dietList", dietList);
+   session.setAttribute("userFoodList", userFoodList);
+   response.sendRedirect("dietUpdate.jsp");
 
 %>
 

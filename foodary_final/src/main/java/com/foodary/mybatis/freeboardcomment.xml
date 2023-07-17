@@ -5,7 +5,7 @@
 	<!-- 댓글 1건을 저장한다. -->
 	<insert id="insertComment" parameterType="vo">
 		insert into freeboardcomment (idx, gup, name, content, id) 
-		values (freeboardcomment_idx_seq.nextval, #{gup, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR})
+		values (freeboardcomment_idx_seq.nextval, #{gup}, #{name}, #{content}, #{id})
 	</insert>
 	
 	<!-- 댓글의 개수를 얻어온다. -->
